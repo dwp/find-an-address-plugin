@@ -1,0 +1,98 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  What is your address? - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript: window.history.go(-1)"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error.addressLineError,
+              href: "#address-line-1"
+            } if error.addressLineError else "",
+            {
+              text: error.townOrCityError,
+              href: "#town-city"
+            } if error.townOrCityError else "",
+            {
+              text: error.postcodeError,
+              href: "#postcode"
+            } if error.postcodeError else ""
+          ]
+        }) }}
+      {% endif %}
+
+      <form method="post">
+        {% call govukFieldset({
+          legend: {
+            text: "What is your address?",
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        }) %}
+          {{ govukInput({
+            label: {
+              text: "Address line 1"
+            },
+            id: "address-line-1",
+            name: "address-line-1",
+            errorMessage: { text: error.addressLineError } if error.addressLineError else "",
+            value: data['address-line-1'],
+            autocomplete: "address-line1"
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Address line 2 (optional)"
+            },
+            id: "address-line-2",
+            name: "address-line-2",
+            value: data['address-line-2'],
+            autocomplete: "address-line2"
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Town or city"
+            },
+            classes: "govuk-!-width-two-thirds",
+            id: "town-city",
+            name: "town-city",
+            errorMessage: { text: error.townOrCityError } if error.townOrCityError else "",
+            value: data['town-city'],
+            autocomplete: "address-level2"
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Postcode"
+            },
+            classes: "govuk-input--width-10",
+            id: "postcode",
+            name: "postcode",
+            errorMessage: { text: error.postcodeError } if error.postcodeError else "",
+            value: data['postcode'],
+            autocomplete: "postal-code"
+          }) }}
+        {% endcall %}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+      <p class="govuk-body govuk-!-margin-bottom-0"><a href="/dwp-find-an-address-plugin" class="govuk-link">Find an address</a></p>
+    </div>
+  </div>
+{% endblock %}

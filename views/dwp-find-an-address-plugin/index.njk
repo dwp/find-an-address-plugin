@@ -1,0 +1,81 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Find address - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript: window.history.go(-1)"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#postcode"
+            } if error else {}
+          ]
+        }) }}
+      {% endif %}
+      
+      <form method="post" autocomplete="off">
+        <fieldset class="govuk-fieldset" role="group" {% if error %} aria-describedby="lookup-error" {% endif %}>
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Find an address
+            </h1>
+          </legend>
+          {% if error %}
+            <div class="govuk-form-group govuk-form-group--error">
+              <p id="lookup-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Enter a postcode, the first line of an address, or both.
+              </p>
+          {% endif %}
+          
+          {{ govukInput({
+            label: {
+              text: "Postcode"
+            },
+            classes: "govuk-input--width-10",
+            hint: {
+              text: "For example, AA3 1AB."
+            },
+            id: "postcode",
+            name: "postcode",
+            value: data['postcode']
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Building number or name"
+            },
+            hint: {
+              text: "For example, 15 or Prospect Cottage."
+            },
+            id: "searchString",
+            name: "searchString",
+            value: data['searchString']
+          }) }}
+
+          {% if error %}
+            </div>
+          {% endif %}
+        </fieldset>
+
+        {{ govukButton({
+          text: "Find address"
+        }) }}
+      </form>
+
+       <p class="govuk-body govuk-!-margin-bottom-0"><a href="/dwp-find-an-address-plugin/manual-entry" class="govuk-link">Enter address manually</a></p>
+    </div>
+  </div>
+{% endblock %}

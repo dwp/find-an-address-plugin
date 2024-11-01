@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Confirm address - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript: window.history.go(-1)"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Confirm address
+      </h1>
+      <p class="govuk-body">{{ addressData.length or data.results.length }} {{"address" if addressData.length or data.results.length == 1 else "addresses" }} found for 
+        <span class="govuk-body govuk-!-font-weight-bold">
+          {{ data.postcode }}
+        </span>
+        {{-" and " if data.postcode and data.searchString else ""-}}
+        <span class="govuk-body govuk-!-font-weight-bold">
+          {{ data.searchString }}<span class="govuk-body govuk-!-font-weight-regular">.</span>
+        </span>
+        <a class="govuk-link" href="/dwp-find-an-address-plugin">
+            Search again
+        </a>
+      </p>
+      
+      {% if data.address %}
+        <p class="govuk-inset-text">{{data.address}}</p>
+      {% else %}
+        <p class="govuk-inset-text">{{addressData | first}}</p>
+      {% endif %}
+
+      {{ govukButton({
+        text: "Use this address",
+        href: data.find_an_address_exit_url | d("/")
+      }) }}
+      
+      {% if (addressData.length or data.results.length) !== 1 %}
+        <p class="govuk-body"><a href="/dwp-find-an-address-plugin/address-select-multi" class="govuk-link">Use a different address</a></p>
+      {% endif %}
+      
+      <p class="govuk-body govuk-!-margin-bottom-0"><a href="/dwp-find-an-address-plugin/manual-entry" class="govuk-link">Enter address manually</a></p>
+    </div>
+  </div>
+
+{% endblock %}

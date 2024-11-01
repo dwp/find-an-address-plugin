@@ -1,0 +1,66 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Select address - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript: window.history.go(-1)"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        Select address
+      </h1>
+      <p class="">{{ addressData.length or data.results.length }} addresses found for 
+        <span class="govuk-!-font-weight-bold">{{ data.postcode }}</span>
+        {{-" and " if data.postcode and data.searchString -}}
+        <span class="govuk-!-font-weight-bold">{{ data.searchString }}<span class="govuk-!-font-weight-regular">.</span></span>
+        <a class="govuk-link" href="/dwp-find-an-address-plugin">
+            Search again
+        </a>
+      </p>
+
+      {% set addressLines = [] %}
+
+      {% if addressData or data.results %}
+        {% for item in addressData or data.results %}
+          {% set addressLines = (addressLines.push(
+            {
+              value: item,
+              text: item
+            }
+          ), addressLines)%}
+        {% endfor %}
+      {% endif %}
+
+      <form method="post" autocomplete="off" action="/dwp-find-an-address-plugin/confirm-address">
+
+        {{ govukRadios({
+          fieldset: {
+            legend: {
+              text: "Select address",
+              isPageHeading: false,
+              classes: "govuk-visually-hidden"
+            }
+          },
+          id: "address",
+          name: "address",
+          classes: "govuk-!-width-full",
+          items: addressLines
+        }) }}
+
+        {{ govukButton({
+          text: "Use this address"
+        }) }}
+
+      </form>
+     <p class="govuk-body govuk-!-margin-bottom-0"><a href="/dwp-find-an-address-plugin/manual-entry" class="govuk-link">Enter address manually</a></p>
+    </div>
+  </div>
+
+{% endblock %}

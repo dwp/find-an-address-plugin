@@ -1,0 +1,13 @@
+node_modules
+package
+test-prototype/node_modules
+*.tgz
+.DS_Store
+node_modules
+package
+test-prototype/node_modules
+*.tgz
+.DS_Store
+.dwp
+.gitlab-ci.yml
+.package-lock.json

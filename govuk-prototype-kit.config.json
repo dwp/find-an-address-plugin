@@ -1,0 +1,6 @@
+{
+	"meta": {
+		"description": "This plugin provides a basic find-an-address journey for prototyping."
+	},
+	"nunjucksPaths": ["/views"]
+}

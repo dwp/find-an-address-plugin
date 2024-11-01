@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  No address found - GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript: window.history.go(-1)"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">
+        No address found
+      </h1>
+      <p class="govuk-body">
+        We could not find an address that matches  <span class="govuk-!-font-weight-bold">
+          {{ data.postcode | trim }}
+        </span>
+        {{-" and " if data.postcode and data.searchString else ""-}}
+        <span class="govuk-!-font-weight-bold">{{ data.searchString | trim }}</span>. You can search again or enter the address manually.
+      </p>
+      <p class="govuk-body"><a class="govuk-link" href="/dwp-find-an-address-plugin">Search again</a></p>
+      <p class="govuk-body govuk-!-margin-bottom-0"><a href="/dwp-find-an-address-plugin/manual-entry" class="govuk-link">Enter address manually</a></p>
+    
+    </div>
+  </div>
+{% endblock %}
