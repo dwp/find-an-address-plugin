@@ -12,7 +12,7 @@ The plugin uses the [Ordnance Survey Place API](https://osdatahub.os.uk/docs/pla
 
 1. Request an API key by emailing the Design System Team on [dwp-design-system@engineering.digital.dwp.gov.uk](mailto:dwp-design-system@engineering.digital.dwp.gov.uk).
 
-2. To make your prototype work locally, add the API key to the `.env` file in your prototype like so: `OS_API_KEY=your-api-key`.
+2. To make your prototype work locally, add the API key to the `.env` file in your prototype like so: `OS_API_KEY=your-api-key`. If your prototype doesn't have a `.env` file, create one that just contains this text and save it in the prototype's root folder.
 
 3. To deploy the key to your published prototype, set `OS_API_KEY` as an environment variable on your hosting service. The way this works will depend on your hosting service: on Heroku you can [use the command line, the dashboard or the platform API](https://devcenter.heroku.com/articles/config-vars#managing-config-vars).
 
@@ -30,7 +30,7 @@ In the folder that contains your prototype, install the plugin by running the fo
 
 ```
 
-const findAddressPlugin = require("/find-an-address-plugin");
+const findAddressPlugin = require("find-an-address-plugin");
 
 findAddressPlugin(router);
 ```
