@@ -1,36 +1,43 @@
-# Find an address plugin for the GOV.UK Prototype Kit.
+# Find an address plugin for the GOV.UK Prototype Kit
 
-A basic [Find an address pattern](https://design-system.dwp.gov.uk/patterns/find-an-address) plugin for prototyping.
+A basic address finder plugin for use with the [GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk/docs/).
+
+This plugin allows you to insert the full [DWP Find an address pattern](https://design-system.dwp.gov.uk/patterns/find-an-address) into a prototype without having to code individual pages or routes. It includes pages, routes and logic for storing an address in the prototype session.
 
 ## Requirements
+
+To use this plugin you will need the GOV.UK Prototype Kit version 13 or later. This includes a "Manage your prototype" page for managing and installing plugins.
 
 The plugin uses the [Ordnance Survey Place API](https://osdatahub.os.uk/docs/places/overview). For it to work you will need to add an API key to your prototype.
 
 1. Request an API key by emailing the Design System Team on [dwp-design-system@engineering.digital.dwp.gov.uk](mailto:dwp-design-system@engineering.digital.dwp.gov.uk).
 
-2. To make your prototype work locally, add the API key to the `.env` file in your prototype (create one in your root folder if there isn't one) like so: `OS_API_KEY=your-api-key`.
+2. To make your prototype work locally, add the API key to the `.env` file in your prototype like so: `OS_API_KEY=your-api-key`.
 
 3. To deploy the key to your published prototype, set `OS_API_KEY` as an environment variable on your hosting service. The way this works will depend on your hosting service: on Heroku you can [use the command line, the dashboard or the platform API](https://devcenter.heroku.com/articles/config-vars#managing-config-vars).
 
-## Using the plugin with the GOV.UK prototype kit
+## Using the plugin with the GOV.UK Prototype Kit
+
+These instructions assume you have already started a prototype by installing the GOV.UK Prototype Kit. If not, do that first.
 
 ### 1. Install the plugin
 
-Install the plugin by running the following command in your terminal:
+In the folder that contains your prototype, install the plugin by running the following terminal command:
 
 `npm i https://github.com/dwp/find-an-address-plugin.git`
 
-### 2. Add the following code to your prototype's `app/routes.js` file:
+### 2. Add the following code to your prototype's `app/routes.js` file
 
 ```
-const findAddressPlugin = require("@dwp/find-an-address-plugin");
+
+const findAddressPlugin = require("/find-an-address-plugin");
 
 findAddressPlugin(router);
 ```
 
 ### 3. Add the Find an address pattern to your prototype
 
-On the page before you want the pattern to appear, call the plugin as follows: in this example the user sees the address search after selecting a "Continue" button.
+Link to the plugin from any page in your prototype as shown below. In this example the link is a "Continue" button.
 
 ```
 
@@ -44,7 +51,9 @@ On the page before you want the pattern to appear, call the plugin as follows: i
 }}
 ```
 
-Set the `find_an_address_exit_url` to the URL of the first page after the address finder. (See [Use links to set data](https://prototype-kit.service.gov.uk/docs/pass-data#use-links-to-set-data) for more about how this works.) 
+This link also controls what happens after the user successfully confirms an address. Replace `/your-exit-url` with the URL of the page that should appear after the address confirmation page.
+
+(See [Use links to set data](https://prototype-kit.service.gov.uk/docs/pass-data#use-links-to-set-data) for more about how this works.)
 
 ### 4. Use the stored address elsewhere in your prototype
 
