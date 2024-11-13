@@ -17,7 +17,7 @@ The plugin uses the [Ordnance Survey Place API](https://osdatahub.os.uk/docs/pla
 >[!CAUTION]
 >To avoid publishing API keys to a public repository, your `.env` file must remain local and should never be included in any commit.
 
-4. To deploy the key to your published prototype, set `OS_API_KEY` as an environment variable on your hosting service. The way this works will depend on your hosting service: on Heroku you can [use the command line, the dashboard or the platform API](https://devcenter.heroku.com/articles/config-vars#managing-config-vars).
+3. To deploy the key to your published prototype, set `OS_API_KEY` as an environment variable on your hosting service. The way this works will depend on your hosting service: on Heroku you can [use the command line, the dashboard or the platform API](https://devcenter.heroku.com/articles/config-vars#managing-config-vars).
 
 ## Using the plugin with the GOV.UK Prototype Kit
 
