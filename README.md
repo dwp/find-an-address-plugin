@@ -8,7 +8,7 @@ This plugin allows you to insert the full [DWP Find an address pattern](https://
 
 To use this plugin you will need the GOV.UK Prototype Kit version 13 or later.
 
-The plugin uses the [Ordnance Survey Place API](https://osdatahub.os.uk/docs/places/overview). For it to work you will need to add an API key to your prototype.
+You will need to add an API key to your prototype. For prototyping purposes the plugin uses the [Ordnance Survey Place API](https://osdatahub.os.uk/docs/places/overview): DWP production services should use the DWP Address Service instead.
 
 1. Request an API key by emailing the Design System Team on [dwp-design-system@engineering.digital.dwp.gov.uk](mailto:dwp-design-system@engineering.digital.dwp.gov.uk).
 
