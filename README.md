@@ -65,7 +65,7 @@ The stored address will be cleared (along with any other stored session data) by
 
 1. Go to the page of the plugin you want to override and make a note of its url. For instance, if you want to change we want to change the confirm an address page, the url is `/dwp-find-an-address-plugin/confirm-address`. Let's say you want to change the text of the button from "Use this address" to "Confirm this address".
 
-2. Create a new version of the confirm an address page that contains your changes. Then go to the `routes.js` of your prototype and write a new route for your new confirm an address page. It could be something like this:
+2. Create a new version of the confirm an address page that contains your changes. Then go to the `app/routes.js` of your prototype and write a new route for your new confirm an address page. Make sure you place the new route _before_ the code you copied in step 2. It could be something like this:
 
 ```
 router.get("/dwp-find-an-address-plugin/confirm-address", (req, res) => {
