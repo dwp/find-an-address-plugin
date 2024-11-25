@@ -60,3 +60,17 @@ This link also controls what happens after the user successfully confirms an add
 The confirmed address is stored in the prototype session with an object called `address`. You can access it in the [same way you do for other session data](https://prototype-kit.service.gov.uk/docs/session#accessing-fields-from-the-session), using `{{ data.address }}` or `{{ data['address'] }}`.
 
 The stored address will be cleared (along with any other stored session data) by the "Clear data" link in the prototype footer.
+
+### 5. Override the plugin views' content, style or redirect to a different page.
+
+1. Go to the page of the plugin you want to override and make a note of its url. For instance, if you want to change we want to change the confirm an address page, the url is `/dwp-find-an-address-plugin/confirm-address`. Let's say you want to change the text of the button from "Use this address" to "Confirm this address".
+
+2. Create a new version of the confirm an address page that contains your changes. Then go to the `routes.js` of your prototype and write a new route for your new confirm an address page. It could be something like this:
+
+```
+router.get("/dwp-find-an-address-plugin/confirm-address", (req, res) => {
+  res.render("my-new-confirm-address.njk");
+});
+```
+
+3. The plugin will work in the same way as before, but now it will show your new confirmation page when that url is visited.
